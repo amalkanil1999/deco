@@ -158,6 +158,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     flexDirection: 'column',
     justifyContent: 'space-between',
+    
   },
   textInput: {
     width: '100%',
