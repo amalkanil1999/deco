@@ -1,6 +1,6 @@
 import { SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Image, Dimensions, FlatList } from 'react-native'
 import React, {useState, useEffect} from 'react'
-import Searchbar from '../../../includes/Searchbar/SearchBar'
+// import Searchbar from '../../../includes/Searchbar/SearchBar'
 import Search from '../../../includes/Searchbar/Search'
 import Profile from "../../../../assets/images/home/Avatar1.png"
 import Like from "../../../../assets/icons/blike.svg"
@@ -271,7 +271,9 @@ const styles = StyleSheet.create({
   },
   ImageC: {},
   pro: {
-    width: "100%"
+    width: "100%",
+    height: undefined,
+    aspectRatio: 30/20,
   },
   bottom: {
     paddingHorizontal: 14,
