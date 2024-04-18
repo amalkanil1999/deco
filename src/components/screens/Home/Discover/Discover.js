@@ -16,7 +16,7 @@ import LinearGradient from 'react-native-linear-gradient';
 
 const {width, height} = Dimensions.get('screen');
 
-export default function Discover() {
+export default function Discover({navigation}) {
   const cards = [
     {
       id: 1,
@@ -71,11 +71,12 @@ export default function Discover() {
         <View style={styles.first}>
           <View style={styles.top}>
             <Text style={styles.headText}>Topic</Text>
-            <Pressable style={styles.pressable}>
+            <Pressable style={styles.pressable} onPress={()=> navigation.navigate("Topic")}>
               <Text style={styles.pressabletext}>View more</Text>
             </Pressable>
           </View>
           <FlatList
+            contentContainerStyle={styles.contentContainerStyle}
             data={cards}
             horizontal={true}
             showsHorizontalScrollIndicator={false}
@@ -101,6 +102,7 @@ export default function Discover() {
             </Pressable>
           </View>
           <FlatList
+            contentContainerStyle={styles.contentContainerStyle}
             data={collectionCards}
             horizontal={true}
             showsHorizontalScrollIndicator={false}
@@ -147,6 +149,7 @@ export default function Discover() {
             </Pressable>
           </View>
           <FlatList
+            contentContainerStyle={styles.contentContainerStyle}
             data={collectionCards}
             horizontal={true}
             showsHorizontalScrollIndicator={false}
@@ -260,6 +263,9 @@ const styles = StyleSheet.create({
   bottomFlex: {
     flexDirection: 'row',
   },
+  contentContainerStyle: {
+    marginTop: 15,
+  },
   allcontainerImageBDown: {
     width: 158,
     height: 158,
@@ -272,9 +278,9 @@ const styles = StyleSheet.create({
     lineHeight: 21,
     letterSpacing: -0.1,
     color: '#828282',
+    marginVertical: 5,
   },
   additional: {
     top: '41%',
-    
   },
 });

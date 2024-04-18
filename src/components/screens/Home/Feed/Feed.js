@@ -15,7 +15,7 @@ import {
 import React, {useState, useRef, useEffect} from 'react';
 
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import Share from 'react-native-share'
+import Share from 'react-native-share';
 
 import {SafeAreaView} from 'react-native-safe-area-context';
 import ArrowL from '../../../../assets/icons/arrow-left1.svg';
@@ -29,7 +29,6 @@ import Edit from '../../../../assets/icons/EditSquare.svg';
 import Vector from '../../../../assets/icons/Vector.svg';
 import Post from '../../../../assets/icons/Post.svg';
 
-
 const {width, height} = Dimensions.get('screen');
 
 export default function Feed({route, navigation}) {
@@ -39,27 +38,34 @@ export default function Feed({route, navigation}) {
   const [selectedFocus, setSelectedFocus] = useState(false);
   const modalY = useRef(new Animated.Value(height)).current;
   const inputRef = useRef(null);
-  const [liked, setLiked] = useState(false); 
+  const [liked, setLiked] = useState(false);
+  const [likedComments, setLikedComments] = useState([]);
 
   const sendTo = () => {
     const options = {
       title: item.heading,
       message: item.description,
-    }
+    };
     Share.open(options)
-      .then(
-        res => console.log(res)
-    )
-    .catch(err => console.log(err))
-}
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
+  };
 
   const handleLike = () => {
-    setLiked(!liked); 
+    setLiked(!liked);
+  };
+
+  const handleCommentLike = commentId => {
+    const isLiked = likedComments.includes(commentId);
+    if (isLiked) {
+      setLikedComments(likedComments.filter(id => id !== commentId));
+    } else {
+      setLikedComments([...likedComments, commentId]);
+    }
   };
 
   useEffect(() => {
     if (showModal && inputRef.current) {
-      
       inputRef.current.focus();
     }
   }, [showModal]);
@@ -145,7 +151,7 @@ export default function Feed({route, navigation}) {
         </TouchableOpacity>
         <View style={styles.right}>
           <TouchableOpacity onPress={handleLike}>
-          {liked ? <Like width={22} height={23} /> : <LikeBig />}
+            {liked ? <Like width={22} height={23} /> : <LikeBig />}
           </TouchableOpacity>
           <TouchableOpacity>
             <Plus />
@@ -233,50 +239,53 @@ export default function Feed({route, navigation}) {
                 <Edit />
               </TouchableOpacity>
             </View>
-            <KeyboardAwareScrollView style={{ marginBottom: 40}}>
-              
-                <View style={{height: width * 1.7}}>
-                  <FlatList
-                    contentContainerStyle={styles.flatlistC}
-                    data={comments}
-                    showsVerticalScrollIndicator={false}
-                    renderItem={({item}) => (
-                      <View style={styles.commentContainer}>
-                        <Image source={item.profile_pic} />
-                        <View style={styles.leftC}>
-                          <View style={{gap: 4}}>
-                            <Text style={styles.phamCText}>Bruno Pham</Text>
-                            <Text style={styles.commentText}>
-                              {item.comment}
-                            </Text>
+            <KeyboardAwareScrollView style={{marginBottom: 40}}>
+              <View style={{height: width * 1.7}}>
+                <FlatList
+                  contentContainerStyle={styles.flatlistC}
+                  data={comments}
+                  showsVerticalScrollIndicator={false}
+                  renderItem={({item}) => (
+                    <View style={styles.commentContainer}>
+                      <Image source={item.profile_pic} />
+                      <View style={styles.leftC}>
+                        <View style={{gap: 4}}>
+                          <Text style={styles.phamCText}>Bruno Pham</Text>
+                          <Text style={styles.commentText}>{item.comment}</Text>
+                        </View>
+                        <View style={styles.bottomFlex}>
+                          <View style={styles.bottomLFlexContainer}>
+                            <Text style={styles.time}>2 mins ago</Text>
+                            <Text style={styles.likeText}>Like</Text>
                           </View>
-                          <View style={styles.bottomFlex}>
-                            <View style={styles.bottomLFlexContainer}>
-                              <Text style={styles.time}>2 mins ago</Text>
-                              <Text style={styles.likeText}>Like</Text>
-                            </View>
-                            <View style={styles.bottomRFlexContainer}>
-                              <Text style={styles.time}>02</Text>
-                              <Vector />
-                            </View>
+                          <View style={styles.bottomRFlexContainer}>
+                            <Text style={styles.time}>02</Text>
+                            <TouchableOpacity
+                              onPress={() => handleCommentLike(item.id)}>
+                              {likedComments.includes(item.id) ? (
+                                <Like />
+                              ) : (
+                                <Vector />
+                              )}
+                            </TouchableOpacity>
                           </View>
                         </View>
                       </View>
-                    )}
-                  />
-                </View>
-                <View style={styles.postCommentC}>
-                  <TextInput
-                    style={styles.commentPostInput}
-                    ref={inputRef}
-                    placeholder="Type Something"
-                    placeholderTextColor={'#BDBDBD'}
-                  />
-                  <TouchableOpacity>
-                    <Post />
-                  </TouchableOpacity>
-                </View>
-              
+                    </View>
+                  )}
+                />
+              </View>
+              <View style={styles.postCommentC}>
+                <TextInput
+                  style={styles.commentPostInput}
+                  ref={inputRef}
+                  placeholder="Type Something"
+                  placeholderTextColor={'#BDBDBD'}
+                />
+                <TouchableOpacity>
+                  <Post />
+                </TouchableOpacity>
+              </View>
             </KeyboardAwareScrollView>
           </Animated.View>
         </Modal>

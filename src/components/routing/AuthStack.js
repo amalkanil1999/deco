@@ -6,6 +6,7 @@ import SignUp from '../screens/Auth/Signup/SignUp';
 import HomeStack from './HomeStack';
 import New from './New';
 import Feed from '../screens/Home/Feed/Feed';
+import Topic from '../screens/Home/Topic/Topic';
 // import HomeScreen from '../screens/Home/HomeSCreen/HomeScreen';
 
 
@@ -19,6 +20,7 @@ const AuthStack = () => {
       <Stack.Screen name="Signup" component={SignUp} />
       <Stack.Screen name="Homestack" component={HomeStack} />
       <Stack.Screen name="Feed" component={Feed} />
+      <Stack.Screen name="Topic" component={Topic} />
     </Stack.Navigator>
   )
 }
