@@ -1,4 +1,4 @@
-import { Image, ImageBackground, SafeAreaView, Dimensions, StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { Image, ImageBackground,Modal, SafeAreaView, Dimensions, StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import React, {useState} from 'react'
 import Setting from "../../../../assets/icons/Setting.svg"
 import Fb from  "../../../../assets/icons/facebook1.svg"
@@ -10,7 +10,7 @@ import Collection from './_components/Collection'
 
 const {width, height} = Dimensions.get('screen');
 
-export default function User() {
+export default function User({navigation}) {
   const [selected, setSelected] = useState(1);
 
   const renderContent = () => {
@@ -31,7 +31,8 @@ export default function User() {
       <ImageBackground style={styles.backG} resizeMode="stretch" source={require("../../../../assets/images/user/background.png")} >
         <View style={styles.setting}>
           <Text style={styles.atText}>@brunopham</Text>
-          <TouchableOpacity><Setting /></TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate("Profile")}><Setting /></TouchableOpacity>
+          
         </View>
         <Image style={styles.propic} source={require("../../../../assets/images/user/propic.png")} />
       </ImageBackground>
@@ -80,6 +81,7 @@ export default function User() {
       </View>
       {renderContent()}
     </SafeAreaView>
+    
   )
 }
 

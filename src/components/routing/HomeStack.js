@@ -19,6 +19,7 @@ import User from '../screens/Home/User/User';
 import Add from '../screens/Home/Add/Add';
 import CustomTabBarButton from "../includes/CustomTabBarButton"
 import Notification from '../screens/Home/Notification/Notification';
+import UserStack from './UserStack';
 
 
 const Tab = createBottomTabNavigator();
@@ -48,7 +49,7 @@ export default function HomeStack() {
           ? <NotificationFocused style={styles.iconStyle} />
           : <NotificationI style={styles.iconStyle} />
             
-        } else if (route.name === 'User') {
+        } else if (route.name === 'UserStack') {
           iconPath = focused
           ? <ProfileFocused style={styles.iconStyle}  />
           : <Profile style={styles.iconStyle}  />
@@ -62,7 +63,7 @@ export default function HomeStack() {
         right: 0,
         left: 0,
         height: 80,
-        
+        zIndex: 10,
       }
     })} initialRouteName='Home'
       
@@ -71,7 +72,7 @@ export default function HomeStack() {
       <Tab.Screen options={{ headerShown: false}} name="Discover" component={Discover} />
       <Tab.Screen options={{ headerShown: false}} name="Add" component={Add} />
       <Tab.Screen options={{ headerShown: false}} name="Notification" component={Notification} />
-      <Tab.Screen options={{ headerShown: false}} name="User" component={User} />
+      <Tab.Screen options={{ headerShown: false}} name="UserStack" component={UserStack} />
     </Tab.Navigator>
   )
 }

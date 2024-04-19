@@ -7,6 +7,7 @@ import HomeStack from './HomeStack';
 import New from './New';
 import Feed from '../screens/Home/Feed/Feed';
 import Topic from '../screens/Home/Topic/Topic';
+import EditProfile from '../screens/Home/Edit/EditProfile';
 // import HomeScreen from '../screens/Home/HomeSCreen/HomeScreen';
 
 
@@ -21,6 +22,7 @@ const AuthStack = () => {
       <Stack.Screen name="Homestack" component={HomeStack} />
       <Stack.Screen name="Feed" component={Feed} />
       <Stack.Screen name="Topic" component={Topic} />
+      <Stack.Screen name="EditProfile" component={EditProfile} />
     </Stack.Navigator>
   )
 }
