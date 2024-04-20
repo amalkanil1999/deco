@@ -10,10 +10,12 @@ import {
 } from 'react-native';
 import React from 'react';
 
+import LinearGradient from 'react-native-linear-gradient'; 
+
 import Eye from '../../../../assets/icons/Show.svg';
 import FB from '../../../../assets/icons/fb.svg';
 import Google from '../../../../assets/icons/google.svg';
-import LinearGradient from 'react-native-linear-gradient';
+
 
 const {width, height} = Dimensions.get('screen');
 

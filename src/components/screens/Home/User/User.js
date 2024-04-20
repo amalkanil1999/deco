@@ -1,5 +1,9 @@
 import { Image, ImageBackground,Modal, SafeAreaView, Dimensions, StyleSheet, Text, View, TouchableOpacity } from 'react-native'
-import React, {useState} from 'react'
+import React, { useState, useEffect } from 'react'
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useFocusEffect } from '@react-navigation/native';
+
 import Setting from "../../../../assets/icons/Setting.svg"
 import Fb from  "../../../../assets/icons/facebook1.svg"
 import Insta from  "../../../../assets/icons/insta.svg"
@@ -12,6 +16,39 @@ const {width, height} = Dimensions.get('screen');
 
 export default function User({navigation}) {
   const [selected, setSelected] = useState(1);
+  const [profileData, setProfileData] = useState({
+    name: '',
+    email: '',
+    lastName: ''
+  });
+
+  useFocusEffect(
+    React.useCallback(() => {
+      const retrieveProfileData = async () => {
+        try {
+          const storedName = await AsyncStorage.getItem('name');
+          const storedEmail = await AsyncStorage.getItem('email');
+          const storedLastName = await AsyncStorage.getItem('lastName');
+  
+          const defaultName = 'Bruno';
+          const defaultEmail = 'thanhphamdhbk@gmail.com';
+          const defaultLastName = 'Pham ';
+  
+          const name = storedName || defaultName;
+          const email = storedEmail || defaultEmail;
+          const lastName = storedLastName || defaultLastName;
+  
+          setProfileData({ name, email, lastName });
+        } catch (error) {
+          console.error('Error retrieving profile data:', error);
+        }
+      };
+  
+      retrieveProfileData();
+    }, [])
+  );
+
+  const { name, email, lastName } = profileData
 
   const renderContent = () => {
     if (selected === 1) {
@@ -38,7 +75,7 @@ export default function User({navigation}) {
       </ImageBackground>
       <View style={styles.profile}>
         <View style={styles.details}>
-          <Text style={styles.name}>Bruno Pham</Text>
+          <Text style={styles.name}>{name} {lastName}</Text>
           <Text style={styles.place}>Da nang, Vietnam</Text>
         </View>
         <View style={styles.followTab}>

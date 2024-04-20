@@ -8,14 +8,59 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import Edit from '../../../../assets/icons/EditSquareB.svg';
 import Arrow from '../../../../assets/icons/arrow.svg';
 import Logout from '../../../../assets/icons/Logout.svg';
 
 const {width, height} = Dimensions.get('screen');
 
-export default function Profile({navigation}) {
+export default function Profile({ navigation }) {
+  const [profileData, setProfileData] = useState({
+    name: '',
+    email: '',
+    lastName: ''
+  });
+
+  useEffect(() => {
+    const retrieveProfileData = async () => {
+      try {
+        const storedName = await AsyncStorage.getItem('name');
+        const storedEmail = await AsyncStorage.getItem('email');
+        const storedLastName = await AsyncStorage.getItem('lastName');
+
+        const defaultName = 'Bruno';
+        const defaultEmail = 'thanhphamdhbk@gmail.com'; 
+        const defaultLastName = 'Pham '; 
+
+        const name = storedName || defaultName;
+        const email = storedEmail || defaultEmail;
+        const lastName = storedLastName || defaultLastName;
+
+        setProfileData({ name, email, lastName });
+      } catch (error) {
+        console.error('Error retrieving profile data:', error);
+      }
+    };
+
+    retrieveProfileData();
+  }, []);
+
+  const { name, email, lastName } = profileData
+  
+  const resetCache = async () => {
+    try {
+      await AsyncStorage.clear()
+      navigation.navigate("Signup")
+    } catch(error) {
+      console.error('Error clearing profile data:', error)
+    }
+  }
+
+
   return (
     <SafeAreaView>
       <ImageBackground
@@ -29,8 +74,8 @@ export default function Profile({navigation}) {
                 source={require('../../../../assets/images/user/Avatar.png')}
               />
               <View style={styles.details}>
-                <Text style={styles.name}>Bruno Pham</Text>
-                <Text style={styles.email}>thanhphamdhbk@gmail.com</Text>
+                <Text style={styles.name}>{name} {lastName}</Text>
+                <Text style={styles.email}>{email}</Text>
               </View>
               <TouchableOpacity onPress={()=> navigation.navigate("EditProfile")}><Edit height={20} width={20} /></TouchableOpacity>
             </View>
@@ -92,7 +137,7 @@ export default function Profile({navigation}) {
               </TouchableOpacity>
             </View>
           </View>
-          <TouchableOpacity style={styles.signoutB}>
+          <TouchableOpacity style={styles.signoutB} onPress={resetCache}>
             <Logout />
             <Text style={styles.logoutText}>Log Out</Text>
           </TouchableOpacity>
@@ -120,15 +165,18 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   profile: {
+    width: width - 40,
     alignSelf: 'center',
     paddingVertical: 14,
     paddingHorizontal: 10,
     flexDirection: 'row',
-    gap: 14,
+    justifyContent: 'space-between',
+    // gap: 14,
   },
   details: {
-    marginRight: 40,
     paddingVertical: 8,
+    width:220,
+    height: 60,
   },
   name: {
     color: '#fff',
@@ -142,6 +190,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     lineHeight: 18,
     fontFamily: 'Poppins-Regular',
+    maxHeight:100,
   },
   middle: {
     marginTop: 20,
