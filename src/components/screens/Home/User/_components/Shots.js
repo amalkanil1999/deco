@@ -79,6 +79,7 @@ const styles = StyleSheet.create({
   gridC: {
     flexDirection: "row",
     gap: 15,
+    paddingBottom: 30,
   },
 
 })

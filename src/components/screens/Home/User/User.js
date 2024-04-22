@@ -32,7 +32,7 @@ export default function User({navigation}) {
   
           const defaultName = 'Bruno';
           const defaultEmail = 'thanhphamdhbk@gmail.com';
-          const defaultLastName = 'Pham ';
+          const defaultLastName = 'Pham';
   
           const name = storedName || defaultName;
           const email = storedEmail || defaultEmail;
@@ -157,6 +157,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     lineHeight: 24,
     color: '#242424',
+    textAlign: 'center',
   },
   place: {
     fontFamily: 'Poppins-Medium',

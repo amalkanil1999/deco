@@ -4,7 +4,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Boarding from '../screens/Auth/Boarding/Boarding';
 import SignUp from '../screens/Auth/Signup/SignUp';
 import HomeStack from './HomeStack';
-import New from './New';
 import Feed from '../screens/Home/Feed/Feed';
 import Topic from '../screens/Home/Topic/Topic';
 import EditProfile from '../screens/Home/Edit/EditProfile';

@@ -40,6 +40,8 @@ export default function Feed({route, navigation}) {
   const inputRef = useRef(null);
   const [liked, setLiked] = useState(false);
   const [likedComments, setLikedComments] = useState([]);
+  const [flatListHeight, setFlatListHeight] = useState(true); 
+
 
   const sendTo = () => {
     const options = {
@@ -87,8 +89,19 @@ export default function Feed({route, navigation}) {
   const close = () => {
     setShowModal(false);
   };
+
+  const handleInputFocused = () => {
+   
+    setFlatListHeight(false); 
+  };
+
+  const handleBlur = () => { 
+    setFlatListHeight(true); 
+  }
+
   const handleInputFocus = () => {
     setShowModal(true);
+    
   };
   const comments = [
     {
@@ -195,7 +208,6 @@ export default function Feed({route, navigation}) {
             style={styles.commentScroll}
             showsVerticalScrollIndicator={false}
             onScroll={handleScroll}
-            // scrollEventThrottle={16}
           >
             <View style={styles.commentContainer}>
               <Image source={item.profile_pic} />
@@ -239,8 +251,7 @@ export default function Feed({route, navigation}) {
                 <Edit />
               </TouchableOpacity>
             </View>
-            <KeyboardAwareScrollView style={{marginBottom: 40}}>
-              <View style={{height: width * 1.7}}>
+              <View style={{height: flatListHeight ? width*1.7 : width*1}}>
                 <FlatList
                   contentContainerStyle={styles.flatlistC}
                   data={comments}
@@ -278,15 +289,15 @@ export default function Feed({route, navigation}) {
               <View style={styles.postCommentC}>
                 <TextInput
                   style={styles.commentPostInput}
-                  ref={inputRef}
                   placeholder="Type Something"
-                  placeholderTextColor={'#BDBDBD'}
+                placeholderTextColor={'#BDBDBD'}
+                onFocus={handleInputFocused}
+                onBlur={handleBlur}
                 />
                 <TouchableOpacity>
                   <Post />
                 </TouchableOpacity>
               </View>
-            </KeyboardAwareScrollView>
           </Animated.View>
         </Modal>
       </View>

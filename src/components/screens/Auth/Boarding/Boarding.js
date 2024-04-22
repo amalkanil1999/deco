@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
   },
   secondContainer: {
     flex: 1,
-    paddingVertical: 100,
+    paddingVertical: width/4,
     paddingHorizontal: 10,
     // backgroundColor: "#fff",
   },
@@ -92,7 +92,8 @@ const styles = StyleSheet.create({
   cardContainer: {
     alignItems: 'center',
     position: 'relative',
-    height: 450,
+    // height: 450,
+    height: width* 1.15,
     // backgroundColor: "#000",
   },
   flexTop: {

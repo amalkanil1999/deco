@@ -65,7 +65,8 @@ export default function Discover({navigation}) {
     },
   ];
   return (
-    <SafeAreaView style={{backgroundColor: '#fff'}}>
+    <SafeAreaView style={{ backgroundColor: '#fff' }}>
+      <ScrollView showsVerticalScrollIndicator={false}>
       <Search />
       <View style={styles.main}>
         <View style={styles.first}>
@@ -188,7 +189,8 @@ export default function Discover({navigation}) {
             )}
           />
         </View>
-      </View>
+        </View>
+        </ScrollView>
     </SafeAreaView>
   );
 }

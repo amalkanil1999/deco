@@ -146,8 +146,8 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    gap: 180,
-    marginTop: 100,
+    gap: width / 2.17,
+    marginTop: width/4,
   },
   labelText: {
     fontSize: 16,

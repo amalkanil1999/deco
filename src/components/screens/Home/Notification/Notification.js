@@ -6,8 +6,11 @@ import {
   Image,
   TouchableOpacity,
   FlatList,
+  Dimensions
 } from 'react-native';
-import React, {useState} from 'react';
+import React, { useState } from 'react';
+
+const {width, height} = Dimensions.get('screen');
 
 export default function Notification() {
 
@@ -82,7 +85,7 @@ export default function Notification() {
         <Text style={styles.activity}>Activity</Text>
         <Text style={styles.bracket}>(03)</Text>
       </View>
-      <View style={{paddingBottom: 180,}}>
+      <View>
       <FlatList
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.notiBar}
@@ -141,6 +144,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingTop: 10,
     gap: 15,
+    paddingBottom: width/2.1,
   },
   container: {
     padding: 14,
@@ -165,13 +169,13 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   liked: {
-    width: 200,
+    width: width / 2,
     fontSize: 14,
     fontFamily: 'Poppins-Medium',
     color: '#212121',
   },
   likedWithImage: {
-    width: 187,
+    width: width / 2.2,
   },
   blue: {
     color: '#5151C6',

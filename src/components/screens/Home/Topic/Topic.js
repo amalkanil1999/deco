@@ -166,13 +166,13 @@ const styles = StyleSheet.create({
   },
   spotContainer: {
     position: 'relative',
-    height: 140,
+    height: height / 6,
     overflow: 'hidden',
     borderRadius: 10,
   },
   image: {
     width: width - 40,
-    height: 140,
+    height: height / 6,
     position: 'absolute',
   },
   background: {

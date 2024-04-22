@@ -109,19 +109,20 @@ export default function Collection() {
 const styles = StyleSheet.create({
   top: {
     height: width,
-    paddingBottom: 60,
+    
   },
   topC: {
     marginRight: 18,
     margin: 10,
   },
   main: {
-    paddingVertical: 10,
+    paddingTop: 10,
     paddingHorizontal: 15,
+    paddingBottom: 60,
   },
   containerCollection: {
-    width: 158,
-    height: 158,
+    width: width / 2.5,
+    height: width / 2.5,
   },
   imageC: {
     flexDirection: 'column',
@@ -146,8 +147,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   allcontainerImageBDown: {
-    width: 158,
-    height: 158,
+    width: width / 2.5,
+    height: width / 2.5,
     borderRadius: 10,
     position: 'absolute',
     borderRadius: 10,

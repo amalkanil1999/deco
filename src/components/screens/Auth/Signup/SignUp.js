@@ -76,7 +76,7 @@ export default function SignUp({navigation}) {
             />
             <Eye style={styles.eye} />
           </View>
-          <Text style={styles.forgotPass}>FORGOT PASSWORD</Text>
+          <TouchableOpacity><Text style={styles.forgotPass}>FORGOT PASSWORD</Text></TouchableOpacity>
           <LinearGradient
             style={styles.loginButton}
             colors={['#5151C6', '#888BF4']}
@@ -88,12 +88,12 @@ export default function SignUp({navigation}) {
           </LinearGradient>
           <Text style={styles.orText}>OR LOGIN BY</Text>
           <View style={styles.iconContainer}>
-            <Google />
-            <FB  />
+            <TouchableOpacity><Google /></TouchableOpacity>
+            <TouchableOpacity><FB  /></TouchableOpacity>
           </View>
           <View style={styles.bottomText}>
             <Text style={styles.account}>Don't have account?</Text>
-            <Text style={styles.signText}>SIGN UP</Text>
+            <TouchableOpacity><Text style={styles.signText}>SIGN UP</Text></TouchableOpacity>
           </View>
         </View>
       </View>
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
   safeArea: {},
   top: {
     position: 'relative',
-    height: 300,
+    height: width/1.31,
   },
   cardFlexContainer: {
     width: '100%',
@@ -121,7 +121,8 @@ const styles = StyleSheet.create({
   },
   overlayContainer: {
     width,
-    height: 300,
+    // height: 300,
+    height: width/1.31,
     opacity: 0.6,
     position: 'absolute',
     // backgroundColor: "lightblue",
@@ -130,7 +131,7 @@ const styles = StyleSheet.create({
   },
   background: {
     height: width,
-    width: 300,
+    width: width/1.31,
     transform: [{rotate: '270deg'}, {scaleY: -1}],
   },
   welcomeContainer: {
@@ -146,7 +147,6 @@ const styles = StyleSheet.create({
   bottom: {
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
-    height: 510,
     backgroundColor: '#fff',
     paddingVertical: 40,
     marginTop: -30,

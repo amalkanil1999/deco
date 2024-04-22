@@ -171,12 +171,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    // gap: 14,
+   
   },
   details: {
     paddingVertical: 8,
-    width:220,
-    height: 60,
+    width: width/1.7,
   },
   name: {
     color: '#fff',

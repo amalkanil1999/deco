@@ -177,11 +177,12 @@ export default function HomeScreen({navigation}) {
         </TouchableOpacity>
       </View>
       <View style={styles.flat}>
-      <FlatList 
+        <FlatList 
+          decelerationRate="fast"
+          snapToAlignment="center"
         contentContainerStyle={styles.flatlistC}
         renderItem={renderItems}
         data={filteredData()}
-        decelerationRate="fast"
         pagingEnabled={true}
         showsVerticalScrollIndicator={false}
         />
@@ -231,10 +232,10 @@ const styles = StyleSheet.create({
     lineHeight:20,
   },
   flat: {
-    backgroundColor: '#ECEDEE',
-    paddingBottom: 300,
+    backgroundColor: '#ECEDEE', 
   },
   flatlistC: {
+    paddingBottom: width/1.25,
   },
   feedContainer: {
     width: width - 40,

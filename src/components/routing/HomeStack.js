@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View , Image} from 'react-native'
+import { StyleSheet, Text, View , Image , Dimensions,} from 'react-native'
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -22,6 +22,8 @@ import Notification from '../screens/Home/Notification/Notification';
 import UserStack from './UserStack';
 
 
+const {width, height} = Dimensions.get('screen');
+
 const Tab = createBottomTabNavigator();
 
 export default function HomeStack() {
@@ -39,10 +41,11 @@ export default function HomeStack() {
             : <Category style={styles.iconStyle}  />
         }
         else if (route.name === 'Add') {
-          iconPath = focused
-            ? <Plus style={styles.plusButton} />
-          : <Plus style={styles.plusButton}  />
-            
+          iconPath = <View style={styles.plusButtonContainer}>
+          <Plus style={styles.plusIcon} />
+          <View style={styles.bottomHalfBorder} />
+        </View>
+         
         } 
         else if (route.name === 'Notification') {
           iconPath = focused
@@ -62,8 +65,10 @@ export default function HomeStack() {
         bottom: 0,
         right: 0,
         left: 0,
-        height: 80,
-        zIndex: 10,
+        height: width/4.94,
+        borderTopLeftRadius: 15,
+        borderTopRightRadius: 15,
+        // backgroundColor: "transparent",
       }
     })} initialRouteName='Home'
       
@@ -81,8 +86,22 @@ const styles = StyleSheet.create({
   iconStyle: {
     marginBottom: 20,
   },
-  plusButton: {
+  plusButtonContainer: {
+    position: 'relative',
+    alignItems: 'center',
+    marginBottom: width/5,
+  },
+  plusIcon: {
+    zIndex: 2,
+  },
+  bottomHalfBorder: {
     position: 'absolute',
-    bottom: 50,
+    bottom: -5,
+    height: width/11,
+    width: width/5.3,
+    borderBottomLeftRadius:  50,
+    borderBottomRightRadius:  50,
+    backgroundColor: '#e0e0e0',
+    zIndex: 1,
   },
 })
